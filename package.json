@@ -1,0 +1,25 @@
+{
+  "name": "flask-router-plus",
+  "version": "0.1.0",
+  "description": "Flask router upgrade that adds router.use and req.usePath to easily nest isolated routers",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": "",
+  "keywords": [
+    "flask",
+    "router",
+    "nested",
+    "routers",
+    "express",
+    "connect",
+    "use",
+    "usePath"
+  ],
+  "author": "spion",
+  "license": "MIT",
+  "dependencies": {
+    "flask-router": "0.0.4"
+  }
+}
