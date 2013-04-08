@@ -6,7 +6,10 @@
   "scripts": {
     "test": "npm test"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/doxout/flask-router-plus.git"
+  },
   "keywords": [
     "flask",
     "router",
@@ -21,5 +24,11 @@
   "license": "MIT",
   "dependencies": {
     "flask-router": "0.0.4"
-  }
+  },
+  "readmeFilename": "README.md",
+  "gitHead": "016155fde6f96ba9e883020f163098263e7b0b74",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {}
 }
