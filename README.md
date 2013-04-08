@@ -1,6 +1,6 @@
 # flask router plus
 
-Bulds upon `flask-router` by adding 2 new features:
+Flask router upgrade that adds `router.use` and `request.usePath` to easily nest isolated routers
 
 ### request.usePath
 
