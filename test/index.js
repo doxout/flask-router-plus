@@ -40,3 +40,16 @@ exports['router.use'] = function(t) {
     }, t.done.bind(t));
 };
 
+exports['res.send'] = function(t) {
+    t.expect(1);
+    test(function(app, router, server, done) {
+        router.use('/tx', function(req, res) {
+            t.equals(req.url, '/ty', 'checking req.url in sub-use')
+            res.send(200, {error: null});
+            done();
+        });
+        app.use('/test', router.route);
+        http.get(server + '/test/tx/ty');
+    }, t.done.bind(t));
+};
+

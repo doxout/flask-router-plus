@@ -7,6 +7,26 @@ module.exports = function() {
         req.usePath = req.originalUrl
             .substr(0, req.originalUrl.length 
                        - req.url.length);
+        res.send = function(code, headers, data) {
+            if (null == data) { // .send(data), .send(code) or .send(code, data)
+                data = headers;
+                headers = {};
+            }
+            if (null == data && typeof(code) != 'number') { // .send(data)
+                code = 200;
+                data = code;
+            }
+            var ctype;
+            if (typeof(data) == 'string') {
+                ctype = 'text/html; charset=utf-8'                
+            } else {
+                ctype = 'application/json';
+                data = JSON.stringify(data);
+            }
+            headers['content-type'] = headers['content-type'] || ctype;
+            res.writeHead(code, headers);
+            res.end(data);
+        }
         routerRoute(req, res, next);
     }
     router.use = function(usepath) {
