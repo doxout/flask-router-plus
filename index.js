@@ -24,7 +24,6 @@ module.exports = function () {
                 data = JSON.stringify(data);
             }
             headers['content-type'] = headers['content-type'] || ctype;
-            console.log(code, headers, data);
             res.writeHead(code, headers);
             if (null != data) res.write(data);
             res.end();

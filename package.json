@@ -1,6 +1,6 @@
 {
   "name": "flask-router-plus",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Flask router upgrade that adds router.use and request.usePath to easily nest isolated routers",
   "main": "index.js",
   "scripts": {
