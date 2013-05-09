@@ -4,6 +4,7 @@ var test = require('tap').test;
 
 var checks = function(desc, o1, o2) {
     console.log(desc);
+    console.log(o1, o2);
     test(desc, function(t) {
         for (var key in o2)
             t.deepEqual(o2[key], o1[key]);    
@@ -31,8 +32,13 @@ checks('code header json',
        });
 
 checks('just json', 
-       a({err: null}), {
+       a({done: true}), {
            code: 200, 
-           data: JSON.stringify({err:null})
+           data: JSON.stringify({done:true})
        });
 
+checks('just buffer',
+       a(new Buffer('hello')), {
+           code: 200,
+           headers: {}
+       });
