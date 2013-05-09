@@ -1,7 +1,8 @@
-var frp = require('../index'),
-    http = require('http');
+var frp = require('../index');
+var http = require('http');
+var test = require("tap").test;
 
-function test(cb, done) {
+function tst(cb, done) {
     var app = require('flask-router/node_modules/connect')()    
     var router = frp();
     var port = (30000 + Math.random() * 10000).toFixed(0);
@@ -14,9 +15,9 @@ function test(cb, done) {
     });
 };
 
-exports['usePath'] = function(t) {
-    t.expect(1);
-    test(function(app, router, server, done) {
+test('usePath', function(t) {
+    t.plan(1);
+    tst(function(app, router, server, done) {
         router.get('/t', function(req, res) {
             t.equals(req.usePath, '/test', 'checking usePath');
             res.end(200);
@@ -24,12 +25,12 @@ exports['usePath'] = function(t) {
         });
         app.use('/test', router.route);
         http.get(server + '/test/t');
-    }, t.done.bind(t));
-};
+    }, t.end.bind(t));
+});
 
-exports['router.use'] = function(t) {
-    t.expect(1);
-    test(function(app, router, server, done) {
+test('router.use', function(t) {
+    t.plan(1);
+    tst(function(app, router, server, done) {
         router.use('/tx', function(req, res) {
             t.equals(req.url, '/ty', 'checking req.url in sub-use')
             res.end(200);
@@ -37,19 +38,7 @@ exports['router.use'] = function(t) {
         });
         app.use('/test', router.route);
         http.get(server + '/test/tx/ty');
-    }, t.done.bind(t));
-};
+    }, t.end.bind(t));
+});
 
-exports['res.send'] = function(t) {
-    t.expect(1);
-    test(function(app, router, server, done) {
-        router.use('/tx', function(req, res) {
-            t.equals(req.url, '/ty', 'checking req.url in sub-use')
-            res.send(200, {error: null});
-            done();
-        });
-        app.use('/test', router.route);
-        http.get(server + '/test/tx/ty');
-    }, t.done.bind(t));
-};
 

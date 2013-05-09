@@ -1,4 +1,5 @@
-var fr = require('flask-router');
+var fr = require('flask-router'),
+    send = require('./lib/send');
 
 module.exports = function () {
     var router = fr();
@@ -8,22 +9,7 @@ module.exports = function () {
             .substr(0, req.originalUrl.length
                 - req.url.length);
         res.send = function (code, headers, data) {
-            if (null == data) { // .send(data), .send(code) or .send(code, data)
-                data = headers;
-                headers = {};
-            }
-            if (null == data && typeof(code) != 'number') { // .send(data)
-                code = 200;
-                data = code;
-            }
-            var ctype;
-            if (typeof(data) == 'string') {
-                ctype = 'text/html; charset=utf-8';
-            } else if (null != data) {
-                ctype = 'application/json';
-                data = JSON.stringify(data);
-            }
-            headers['content-type'] = headers['content-type'] || ctype;
+            var args = send.arguments(code, headers, data);
             res.writeHead(code, headers);
             if (null != data) res.write(data);
             res.end();
