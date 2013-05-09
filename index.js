@@ -10,8 +10,10 @@ module.exports = function () {
                 - req.url.length);
         res.send = function (code, headers, data) {
             var args = send.arguments(code, headers, data);
+            console.log(args);
             res.writeHead(args.code, args.headers);
-            if (null != data) res.write(args.data);
+            if (null != args.data) 
+                res.write(args.data);
             res.end();
         };
         routerRoute(req, res, next);
