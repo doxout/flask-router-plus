@@ -42,3 +42,9 @@ checks('just buffer',
            code: 200,
            headers: {}
        });
+
+checks('just error', 
+       a(new Error('Message')), {
+           code: 500,
+           data: JSON.stringify({message: 'Message'})
+       });
